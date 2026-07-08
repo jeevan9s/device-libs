@@ -5,7 +5,6 @@
 ## Supported Devices
 
 - **LSM6DSM** — 6-axis IMU (accelerometer + gyroscope)
-- **VL53L0X** — Time-of-Flight (ToF) distance sensor
 - **ADS131M04** — 4-channel, 24-bit precision ADC
 - **TMAG5273** — 3-axis Hall-effect magnetic sensor
 
