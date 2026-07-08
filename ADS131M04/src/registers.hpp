@@ -1,9 +1,18 @@
+
+/**
+ * @file        registers.hpp
+ * @brief       ADS131M04 register mappings.
+ * @author      Jeevan Sanchez
+ * @date        2026-04-29
+ * 
+ * Consult the datasheet (Table 8-12) for register contents: https://www.ti.com/lit/ds/symlink/ads131m04.pdf
+ * 
+ * device-libs/ADS131M04
+ */
+
 #pragma once
 
-/*
- * Register definitions for the ADS131M04
- * Consult the datasheet (Table 8-12) for register contents: https://www.ti.com/lit/ds/symlink/ads131m04.pdf
- */
+#include <Arduino.h>
 
 namespace ADS131M04_REG {
 

@@ -1,9 +1,17 @@
+/**
+ * @file        registers.hpp
+ * @brief       TMAG5273 register mappings.
+ * @author      Jeevan Sanchez
+ * @date        2026-05-03
+ * 
+ * Consult the datasheet (Table 8-1) for register contents: https://www.ti.com/lit/ds/symlink/tmag5273.pdf
+ * 
+ * device-libs/TMAG5273
+ */
+
 #pragma once
 
-/*
- * Register definitions for the TMAG5273
- * Consult the datasheet (Table 8-1) for register contents: https://www.ti.com/lit/ds/symlink/tmag5273.pdf
- */
+#include <Arduino.h>
 
 namespace TMAG5273_REG {
     
