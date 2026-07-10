@@ -36,7 +36,7 @@ class LSM6DSM {
        float readTemp(); 
 
     private:
-        uint8_t addr; 
+        uint8_t _addr; 
         TwoWire* _i2c; 
 
         bool readRegister(uint8_t reg, uint8_t* buffer, uint8_t len = 1); 
