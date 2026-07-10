@@ -34,7 +34,45 @@ bool LSM6DSM::init(uint8_t addr, TwoWire &port);  {
     if (!readRegister(LSM6DSM_REG::Config::WHO_AM_I, &id)) return false; 
     if (id != 0x6A) return false; 
 
+    // trigger hardware reset
+    if (!writeRegister(LSM6DSM_REG::Config::CTRL3_C, 0x01)) return false;  
+    delay(10);
+
     // config 
+
+    // configure accel control reg (CTRL1_XL)
+    // bits 3-0: ODR & Power Mode Selection -- 416 Hz -> 0110
+    // bits 1-0: FS Selection -- 4g -> 10
+    // combined: 0110 1010 = 6A
+    if (!writeRegister(LSM6DSM_REG::Config::CTRL1_XL, 0x6A)) return false; 
+
+    // configure gyro control reg (CTRL2_G)
+    // bits 3-0: ODR & Power Mode Selection -- 416 Hz -> 0110
+    // bits 1-0: FS Selection -- 500dps -> 01
+    // FS @ 125 dps -- disable -> 0 
+    // combined: 0110 0100
+     if (!writeRegister(LSM6DSM_REG::Config::CTRL2_G, 0x64)) return false; 
+
+    // configure control reg (CTRL3_C)
+    // enable BDU -> 1
+    // enable multi-byte bursts -> 1
+    // software reset -> 1
+     if (!writeRegister(LSM6DSM_REG::Config::CTRL3_C, 0x44)) return false; 
+
+    // configure control reg 2 (CTRL4_C)
+    // enable digital LPF for gyro -> 1
+    // enable I2C -> 0
+    // mask both drdy signals -> 1
+     if (!writeRegister(LSM6DSM_REG::Config::CTRL4_C, 0x0A)) return false; 
+
+     // ctrl6_c
+     // ctrl8_xl
+
+     
+
+
+
+
     
 
 

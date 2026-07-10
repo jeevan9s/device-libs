@@ -23,6 +23,8 @@ class LSM6DSM {
         bool init(uint8_t addr, TwoWire &port); 
         
         // data
+        bool dataReady();
+
         float* readAll(); 
 
         float accX(); 
