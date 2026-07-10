@@ -14,7 +14,6 @@
 
 namespace LSM6DSM_REG {
     class Config {
-        constexpr uint8_t FUNC_CFG_ACCESS = 0x01; 
         constexpr uint8_t CTRL1_XL = 0x10; 
         constexpr uint8_t CTRL2_G = 0x11; 
         constexpr uint8_t CTRL3_C = 0x12; 
@@ -26,7 +25,6 @@ namespace LSM6DSM_REG {
         constexpr uint8_t CTRL9_XL = 0x18; 
         constexpr uint8_t CTRL10_C = 0x19; 
         constexpr uint8_t WHO_AM_I = 0X0F; 
-        constexpr uint8_t MASTER_CONFIG = 0X1A; 
         constexpr uint8_t STATUS_REG = 0X1E;
 }
 

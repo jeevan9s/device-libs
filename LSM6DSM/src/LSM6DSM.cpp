@@ -28,9 +28,19 @@ bool LSM6DSM::init(uint8_t addr, TwoWire &port);  {
     if (!_i2c) return false; 
     _i2c = &port; 
     _addr = addr; 
+
+    // handshake | id is 6Ah
+    uint8_t id;
+    if (!readRegister(LSM6DSM_REG::Config::WHO_AM_I, &id)) return false; 
+    if (id != 0x6A) return false; 
+
+    // config 
+    
+
+
+
     
 }
-
 
 /// @brief reads one or more bytes from a specific register
 /// @param reg starting register address to read from
