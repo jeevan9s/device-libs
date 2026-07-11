@@ -65,19 +65,13 @@ bool LSM6DSM::init(uint8_t addr, TwoWire &port);  {
     // mask both drdy signals -> 1
      if (!writeRegister(LSM6DSM_REG::Config::CTRL4_C, 0x0A)) return false; 
 
-     // ctrl6_c
-     // ctrl8_xl
+    // configure control reg (CTRL8_XL)
+    // enable LPF2 for accel -> 1 
+    // set cutoff to ODR/9 -> 10
+    // combined: 1100 0000
+    if (!writeRegister(LSM6DSM_REG::Config::CTRL4_C, 0xC0)) return false; 
 
-     
-
-
-
-
-    
-
-
-
-    
+    return true;
 }
 
 /// @brief reads one or more bytes from a specific register
