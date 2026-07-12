@@ -2,6 +2,10 @@
   "name": "LSM6DSM",
   "version": "0.0.1",
   "description": "Arduino library for interfacing with the LSM6DSM ADC",
+  "build": {
+    "srcDir": "src",
+    "includeDir": "src"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jeevan9s/device-libs"
