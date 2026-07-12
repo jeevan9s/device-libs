@@ -167,15 +167,17 @@ float LSM6DSM::readTemp()
     return 0.0f; // fail
 }
 
+/// @brief calibrate the gyroscope to remove bias
+/// @param samples number of samples to average for calibration
 void LSM6DSM::calibrateGyro(int samples) {
     float sum[3] = {0.0, 0.0, 0.0}; 
 
     for (int i = 0; i < samples; i++) {
         readAll(); 
 
-        sum[0] += (float)_rawGy[0] * GY_SENS / 1000.0 // x
-        sum[1] += (float)_rawGy[1] * GY_SENS / 1000.0 // y
-        sum[1] += (float)_rawGy[2] * GY_SENS / 1000.0 // z
+        sum[0] += (float)_rawGy[0] * GY_SENS / 1000.0; // x
+        sum[1] += (float)_rawGy[1] * GY_SENS / 1000.0; // y
+        sum[2] += (float)_rawGy[2] * GY_SENS / 1000.0; // z
         delay(5); 
     }
 
