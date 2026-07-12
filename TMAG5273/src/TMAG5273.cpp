@@ -10,7 +10,7 @@
  * device-libs
  */
 
-#include "TMAG5273.hpp"
+#include "TMAG5273.h"
 
 TMAG5273::TMAG5273(uint8_t addr, TwoWire* wire) : _addr(addr), _i2c(wire) {}
 

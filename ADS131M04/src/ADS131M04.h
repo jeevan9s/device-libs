@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 #include <SPI.h>
-#include "registers.hpp"
+#include "registers.h"
 
 #define SPEED_SCLK 8000000
 

@@ -10,7 +10,7 @@
  * device-libs
  */
 
-#include "ADS131M04.hpp"
+#include "ADS131M04.h"
 
 ADS131M04::ADS131M04(int8_t _CS_PIN, int8_t _DRDY_PIN, SPIClass* _SPI) {
     csPin = _CS_PIN;
