@@ -2,13 +2,18 @@
   "name": "ADS131M04",
   "version": "0.0.1",
   "description": "Arduino library for interfacing with the TMAG5273 Linear 3D Hall Effect Sensor",
+  "build": {
+    "srcDir": "src",
+    "includeDir": "src",
+    "srcFilter": ["+<src/*>", "-<examples/*>"]
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Queens-Rocket-Engineering-Team/av-prop.git"
+    "url": "https://github.com/jeevan9s/device-libs"
   },
   "authors": [
     {
-      "name": "QRET",
+      "name": "Jeevan Sanchez",
       "maintainer": true
     }
   ],
