@@ -112,9 +112,9 @@ void LSM6DSM::readAll()
 
     if (readRegister(LSM6DSM_REG::Data::OUTX_L_G, buffer, 12))
     {
-        _rawGyro[0] = combineBytes(buffer[1], buffer[0]);
-        _rawGyro[1] = combineBytes(buffer[3], buffer[2]);
-        _rawGyro[2] = combineBytes(buffer[5], buffer[4]);
+        _rawGy[0] = combineBytes(buffer[1], buffer[0]);
+        _rawGy[1] = combineBytes(buffer[3], buffer[2]);
+        _rawGy[2] = combineBytes(buffer[5], buffer[4]);
 
         _rawAcc[0] = combineBytes(buffer[7], buffer[6]);
         _rawAcc[1] = combineBytes(buffer[9], buffer[8]);
@@ -139,17 +139,17 @@ float LSM6DSM::accZ()
 
 float LSM6DSM::gyX()
 {
-    return rawToDPS(_rawGyro[0]);
+    return rawToDPS(_rawGy[0]);
 }
 
 float LSM6DSM::gyY()
 {
-    return rawToDPS(_rawGyro[1]);
+    return rawToDPS(_rawGy[1]);
 }
 
 float LSM6DSM::gyZ()
 {
-    return rawToDPS(_rawGyro[2]);
+    return rawToDPS(_rawGy[2]);
 }
 
 /// @brief read data from the chip's onboard temperature sensor
