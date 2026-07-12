@@ -112,13 +112,13 @@ void LSM6DSM::readAll()
 
     if (readRegister(LSM6DSM_REG::Data::OUTX_L_G, buffer, 12))
     {
-        _rawGy[0] = combineBytes(buffer[1], buffer[0]);
-        _rawGy[1] = combineBytes(buffer[3], buffer[2]);
-        _rawGy[2] = combineBytes(buffer[5], buffer[4]);
+        _rawGy[0] = static_cast<int16_t>(combineBytes(buffer[1], buffer[0]));
+        _rawGy[1] = static_cast<int16_t>(combineBytes(buffer[3], buffer[2]));
+        _rawGy[2] = static_cast<int16_t>(combineBytes(buffer[5], buffer[4]));
 
-        _rawAcc[0] = combineBytes(buffer[7], buffer[6]);
-        _rawAcc[1] = combineBytes(buffer[9], buffer[8]);
-        _rawAcc[2] = combineBytes(buffer[11], buffer[10]);
+        _rawAcc[0] = static_cast<int16_t>(combineBytes(buffer[7], buffer[6]));
+        _rawAcc[1] = static_cast<int16_t>(combineBytes(buffer[9], buffer[8]));
+        _rawAcc[2] = static_cast<int16_t>(combineBytes(buffer[11], buffer[10]));
     }
 }
 
@@ -158,7 +158,7 @@ float LSM6DSM::readTemp()
 {
     uint8_t tempBuffer[2];
 
-    if (readRegister(LSM6DSM::Data::OUT_TEMP_L, tempBuffer, 2))
+    if (readRegister(LSM6DSM_REG::Data::OUT_TEMP_L, tempBuffer, 2))
     {
         int16_t tempRaw = combineBytes(tempBuffer[1], tempBuffer[0]);
         return rawToC(tempRaw);
