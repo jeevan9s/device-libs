@@ -1,0 +1,11 @@
+{
+  "name": "device-libs",
+  "version": "0.1.0",
+  "build": {
+    "includeDir": [
+      "LSM6DSM/src",
+      "ADS131M04/src",
+      "TMAG5273/src"
+    ]
+  }
+}
