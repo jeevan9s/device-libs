@@ -30,7 +30,7 @@ namespace LSM6DSM_REG {
 
     class Data {
         constexpr uint8_t OUT_TEMP_L = 0x20; 
-        constexpr uint8_t OUT_TEMP_H = 0x20; 
+        constexpr uint8_t OUT_TEMP_H = 0x21; 
         constexpr uint8_t OUTX_L_G = 0x22; 
         constexpr uint8_t OUTX_H_G = 0x23; 
         constexpr uint8_t OUTY_L_G = 0X24; 

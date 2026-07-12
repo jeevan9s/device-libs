@@ -92,14 +92,66 @@ bool LSM6DSM::init(uint8_t addr, TwoWire &port);
     return true;
 }
 
-/// @brief IMU data ready check 
+/// @brief IMU data ready check
 /// @return true if gyroscope and accelerometer are ready to send data
-bool LSM6DSM::dataReady() {
-    uint8_t status; 
-    if (!readRegister(LSM6DSM_REG::Config::STATUS_REG, &status)) 
-    { return false; }
+bool LSM6DSM::dataReady()
+{
+    uint8_t status;
+    if (!readRegister(LSM6DSM_REG::Config::STATUS_REG, &status))
+    {
+        return false;
+    }
 
     return (status & 0x03) == 0x03;
+}
+
+/// @brief update data class members for processing
+void readAll()
+{
+    uint8_t buffer[6];
+
+    if (readRegister(LSM6DSM_REG::Data::OUTX_L_G, buffer, 12))
+    {
+        _rawGyro[0] = combineBytes(buffer[1], buffer[0]);
+        _rawGyro[1] = combineBytes(buffer[3], buffer[2]);
+        _rawGyro[2] = combineBytes(buffer[5], buffer[4]);
+
+        _rawAcc[0] = combineBytes(buffer[7], buffer[6]);
+        _rawAcc[1] = combineBytes(buffer[9], buffer[8]);
+        _rawAcc[0] = combineBytes(buffer[11], buffer[10]);
+    }
+}
+
+float accX() {
+    return rawToG(_rawAcc[0]); 
+}
+
+float accY() {
+    return rawToG(_rawAcc[1]); 
+}
+
+float accZ() {
+    return rawToG(_rawAcc[2]); 
+}
+
+float gyX() {
+    return rawToDPS(_rawGyro[0]); 
+}
+
+float gyY() {
+    return rawToDPS(_rawGyro[1]);
+}
+
+float gyZ() {
+    return rawToDPS(_rawGyro[2]);
+}
+
+float readTemp() {
+    uint8_t tempBuffer; 
+
+    if (readRegister(LSM6DSM::Data::OUT_TEMP_L, tempBuffer, 2)) {
+        tempBuffer
+    }
 }
 
 /// @brief reads one or more bytes from a specific register
