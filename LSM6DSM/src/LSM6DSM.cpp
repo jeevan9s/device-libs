@@ -26,7 +26,7 @@ bool LSM6DSM::init()
 /// @param addr I2C address of sensor (0x6A through LOW hardware)
 /// @param port reference to I2C port
 /// @return true on successful initialization, false otherwise
-bool LSM6DSM::init(uint8_t addr, TwoWire &port);
+bool LSM6DSM::init(uint8_t addr, TwoWire &port)
 {
     if (!_i2c)
         return false;
@@ -106,9 +106,9 @@ bool LSM6DSM::dataReady()
 }
 
 /// @brief update data class members for processing
-void readAll()
+void LSM6DSM::readAll()
 {
-    uint8_t buffer[6];
+    uint8_t buffer[12];
 
     if (readRegister(LSM6DSM_REG::Data::OUTX_L_G, buffer, 12))
     {
@@ -118,40 +118,53 @@ void readAll()
 
         _rawAcc[0] = combineBytes(buffer[7], buffer[6]);
         _rawAcc[1] = combineBytes(buffer[9], buffer[8]);
-        _rawAcc[0] = combineBytes(buffer[11], buffer[10]);
+        _rawAcc[2] = combineBytes(buffer[11], buffer[10]);
     }
 }
 
-float accX() {
-    return rawToG(_rawAcc[0]); 
+float LSM6DSM::accX()
+{
+    return rawToG(_rawAcc[0]);
 }
 
-float accY() {
-    return rawToG(_rawAcc[1]); 
+float LSM6DSM::accY()
+{
+    return rawToG(_rawAcc[1]);
 }
 
-float accZ() {
-    return rawToG(_rawAcc[2]); 
+float LSM6DSM::accZ()
+{
+    return rawToG(_rawAcc[2]);
 }
 
-float gyX() {
-    return rawToDPS(_rawGyro[0]); 
+float LSM6DSM::gyX()
+{
+    return rawToDPS(_rawGyro[0]);
 }
 
-float gyY() {
+float LSM6DSM::gyY()
+{
     return rawToDPS(_rawGyro[1]);
 }
 
-float gyZ() {
+float LSM6DSM::gyZ()
+{
     return rawToDPS(_rawGyro[2]);
 }
 
-float readTemp() {
-    uint8_t tempBuffer; 
+/// @brief read data from the chip's onboard temperature sensor
+/// @return temperature reading in Celsius on a successful read, 0 on read failure
+float LSM6DSM::readTemp()
+{
+    uint8_t tempBuffer[2];
 
-    if (readRegister(LSM6DSM::Data::OUT_TEMP_L, tempBuffer, 2)) {
-        tempBuffer
+    if (readRegister(LSM6DSM::Data::OUT_TEMP_L, tempBuffer, 2))
+    {
+        int16_t tempRaw = combineBytes(tempBuffer[1], tempBuffer[0]);
+        return rawToC(tempRaw);
     }
+
+    return 0.0f; // fail
 }
 
 /// @brief reads one or more bytes from a specific register
@@ -202,7 +215,7 @@ bool LSM6DSM::writeRegister(uint8_t reg, uint8_t data)
 /// @param lsb 8-bit data from lower register
 /// @param hsb 8-bit data from higher register
 /// @return combined 16-bit data
-int16_t LSM6DSM::combineBytes(uint8_t msb, uint8_t lsb)
+uint16_t LSM6DSM::combineBytes(uint8_t msb, uint8_t lsb)
 {
     // shift, add, cast
     return (int16_t)((msb << 8) | lsb);
@@ -211,14 +224,16 @@ int16_t LSM6DSM::combineBytes(uint8_t msb, uint8_t lsb)
 /// @brief convert raw accelerometer reading to G-Units
 /// @param raw direct measurement
 /// @return converted reading as a float
-float LSM6DSM::rawToG(int16_t raw){
-    return (float)raw * ACC_SENS_4G / 1000.0}
+float LSM6DSM::rawToG(int16_t raw) {
+    return (float)raw * ACC_SENS_4G / 1000.0;
+}
 
 /// @brief convert raw gryoscope reading to degrees-per-second
 /// @param raw direct measurement
 /// @return converted reading as a float
-float LSM6DSM::rawToDPS(int16_t raw){
-    return (float)raw * GY_SENS / 1000.0}
+float LSM6DSM::rawToDPS(int16_t raw) {
+    return (float)raw * GY_SENS / 1000.0;
+}
 
 /// @brief convert raw temperature reading to Celsius
 /// @param raw direct measurement

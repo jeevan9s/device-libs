@@ -20,6 +20,7 @@ class LSM6DSM {
         LSM6DSM() : _addr(0x6A), _i2c(&Wire) {}
         LSM6DSM(uint8_t i2c_addr, TwoWire* wire);
 
+        bool init(); 
         bool init(uint8_t addr, TwoWire &port); 
         
         // data
@@ -44,7 +45,7 @@ class LSM6DSM {
         bool readRegister(uint8_t reg, uint8_t* buffer, uint8_t len = 1); 
         bool writeRegister(uint8_t reg, uint8_t data); 
 
-        int16_t combineBytes(int8_t lsb, int8_t hsb);
+        uint16_t combineBytes(uint8_t lsb, uint8_t hsb);
 
         float rawToG(int16_t raw); 
         float rawToDPS(int16_t raw); 
