@@ -57,7 +57,7 @@ class LSM6DSM {
         const float ACC_SENS_4G = 0.122; // mg/LSB  
         const float ACC_SENS_8G = 0.244; // mg/LSB  
         const float GY_SENS = 17.50; // mdps/LSB  FS = ±500
-}
+};
 
 
 
