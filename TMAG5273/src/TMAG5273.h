@@ -53,4 +53,3 @@ class TMAG5273 {
         float rawTomT(int16_t raw, float range = 80.0f); // if range changes, change this to 40.0f
 }; 
 
-#endif 

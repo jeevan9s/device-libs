@@ -45,4 +45,3 @@ private:
     int32_t extendSign(uint32_t data);
 };
 
-#endif
