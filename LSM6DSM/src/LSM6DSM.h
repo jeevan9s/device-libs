@@ -59,8 +59,8 @@ class LSM6DSM {
         const float ACC_SENS_8G = 0.244; // mg/LSB  
         const float GY_SENS = 17.50; // mdps/LSB  FS = ±500
 
-       int16_t* _rawAcc[3]; 
-       int16_t* _rawGy[3];
+       uint16_t* _rawAcc[3]; 
+       uint16_t* _rawGy[3];
 };
 
 
