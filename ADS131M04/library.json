@@ -5,7 +5,7 @@
   "build": {
     "srcDir": "src",
     "includeDir": "src",
-    "srcFilter": ["+<src/*>", "-<examples/*>"]
+    "srcFilter": ["+<*>", "-<../examples/>"]
   },
   "repository": {
     "type": "git",
