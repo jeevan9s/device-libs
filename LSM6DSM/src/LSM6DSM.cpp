@@ -240,5 +240,5 @@ float LSM6DSM::rawToDPS(int16_t raw) {
 /// @return converted reading as a float
 float LSM6DSM::rawToC(int16_t raw)
 {
-    return (float)raw / TEMP_SENS;
+    return 25.0 + ((float)raw / TEMP_SENS);
 }
