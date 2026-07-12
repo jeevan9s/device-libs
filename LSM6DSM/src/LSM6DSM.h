@@ -38,6 +38,8 @@ class LSM6DSM {
 
        float readTemp(); 
 
+       void calibrateGyro(int samples); 
+
     private:
         uint8_t _addr; 
         TwoWire* _i2c; 
@@ -58,6 +60,8 @@ class LSM6DSM {
         const float ACC_SENS_4G = 0.122; // mg/LSB  
         const float ACC_SENS_8G = 0.244; // mg/LSB  
         const float GY_SENS = 17.50; // mdps/LSB  FS = ±500
+
+        float _gyBias[3] = {0.0, 0.0, 0.0}; 
 
        int16_t _rawAcc[3]; 
        int16_t _rawGy[3];

@@ -139,17 +139,17 @@ float LSM6DSM::accZ()
 
 float LSM6DSM::gyX()
 {
-    return rawToDPS(_rawGy[0]);
+    return ((float)rawToDPS(_rawGy[0]) -_gyBias[0]);
 }
 
 float LSM6DSM::gyY()
 {
-    return rawToDPS(_rawGy[1]);
+    return ((float)rawToDPS(_rawGy[1]) -_gyBias[1]);
 }
 
 float LSM6DSM::gyZ()
 {
-    return rawToDPS(_rawGy[2]);
+    return ((float)rawToDPS(_rawGy[2]) -_gyBias[2]);
 }
 
 /// @brief read data from the chip's onboard temperature sensor
@@ -165,6 +165,23 @@ float LSM6DSM::readTemp()
     }
 
     return 0.0f; // fail
+}
+
+void calibrateGyro(int samples) {
+    float sum[3] = {0.0, 0.0, 0.0}; 
+
+    for (int i = 0; i < samples; i++) {
+        readAll(); 
+
+        sum[0] += (float)_rawGy[0] * GY_SENS / 1000.0 // x
+        sum[1] += (float)_rawGy[1] * GY_SENS / 1000.0 // y
+        sum[1] += (float)_rawGy[2] * GY_SENS / 1000.0 // z
+        delay(5); 
+    }
+
+    _gyBias[0] = sum[0] / samples;
+    _gyBias[1] = sum[1] / samples;
+    _gyBias[2] = sum[2] / samples;
 }
 
 /// @brief reads one or more bytes from a specific register
