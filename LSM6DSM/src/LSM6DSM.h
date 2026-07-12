@@ -13,7 +13,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "registers.hpp"
+#include "registers.h"
 
 class LSM6DSM {
     public: 

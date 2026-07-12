@@ -11,7 +11,7 @@
  * device-libs/LSM6DSM
  */
 
-#include "LSM6DSM.hpp"
+#include "LSM6DSM.h"
 
 LSM6DSM::LSM6DSM(uint8_t addr, TwoWire *wire) : _addr(addr), _i2c(wire) {}
 
