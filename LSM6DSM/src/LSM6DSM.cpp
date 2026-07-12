@@ -167,7 +167,7 @@ float LSM6DSM::readTemp()
     return 0.0f; // fail
 }
 
-void calibrateGyro(int samples) {
+void LSM6DSM::calibrateGyro(int samples) {
     float sum[3] = {0.0, 0.0, 0.0}; 
 
     for (int i = 0; i < samples; i++) {
