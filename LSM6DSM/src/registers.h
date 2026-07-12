@@ -26,7 +26,7 @@ namespace LSM6DSM_REG {
         constexpr uint8_t CTRL10_C = 0x19; 
         constexpr uint8_t WHO_AM_I = 0X0F; 
         constexpr uint8_t STATUS_REG = 0X1E;
-}
+};
 
     class Data {
         constexpr uint8_t OUT_TEMP_L = 0x20; 
@@ -43,5 +43,5 @@ namespace LSM6DSM_REG {
         constexpr uint8_t OUTY_H_XL = 0X2B; 
         constexpr uint8_t OUTZ_L_XL = 0x2C; 
         constexpr uint8_t OUTZ_H_G = 0x2D; 
-    }
-}
+    };
+};
