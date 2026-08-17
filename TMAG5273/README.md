@@ -89,7 +89,7 @@ float axes[3]; // store the flux readings for each axis
     delay(250); 
 
 ```
-Check out the [BasicRead](/Firmware/libraries/TMAG5273/examples/BasicRead/basic_read.cpp) example to run this. 
+Check out the [BasicRead](/examples/main.cpp) example to run this.
 
 ---
 
@@ -144,5 +144,5 @@ Configures the internal digital averaging filter.
 
 ---
 
-Jeevan Sanchez
+Jeevan Sanchez, 2026
 

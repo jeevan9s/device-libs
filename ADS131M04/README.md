@@ -114,7 +114,7 @@ else {
 delay(250);
 ```
 
-Check out the [BasicRead](/Firmware/libraries/ADS131M04/examples/BasicRead/basic_read.cpp) example to run this.
+Check out the [BasicRead](/examples/main.cpp) example to run this.
 
 ---
 
@@ -160,4 +160,4 @@ Returns the most recent cached reading for a given ADC channel.
 
 ---
 
-Jeevan Sanchez
+Jeevan Sanchez, 2026
