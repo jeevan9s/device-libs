@@ -15,3 +15,6 @@ These libraries are designed to provide:
 - Minimal dependencies
 - Easy integration into PlatformIO projects
 - Reusable drivers for robotics, avionics, and embedded systems
+
+## Comments
+- Libraries I've written in the past few months (fall 2026), use a shared I2C HAL. These were all developed together for GEKO, a rover I worked on for a school design project.
