@@ -7,6 +7,10 @@
 - **LSM6DSM** — 6-axis IMU (accelerometer + gyroscope)
 - **ADS131M04** — 4-channel, 24-bit precision ADC
 - **TMAG5273** — 3-axis Hall-effect magnetic sensor
+- **CCS811** — indoor air quality sensor (eCO2 and TVOC)
+- **HDC1080** — temperature and humidity sensor
+- **INA219** — voltage, current, and power monitor
+- **i2c** — shared I2C bus hardware abstraction
 
 ## Goals
 

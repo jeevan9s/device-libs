@@ -1,6 +1,6 @@
 /**
  * @file        CCS811.hpp
- * @brief       Definition of hardware driver class for I2C CCSB11 VOC/CO2 sensor
+ * @brief       Driver for the CCS811 indoor air quality sensor
  * @author      Jeevan Sanchez
  * @date        2026-11-06
  *
@@ -11,29 +11,53 @@
 #include <Arduino.h>
 #include "i2c.hpp"
 
+/**
+ * @brief Reads equivalent CO2 and total volatile organic compound values
+ *        from a CCS811 sensor over I2C.
+ */
 class CCS811
 {
 public:
+    /**
+     * @brief Creates a CCS811 driver.
+     * @param i2c Shared I2C bus wrapper.
+     * @param address 7-bit I2C address (default 0x5A).
+     */
     CCS811(I2CBus& i2c, uint8_t address = 0x5A);
 
-    /// @brief  confirm hardware ID, check if app fw is loaded, put app into start, set measuring mode to constant power mode
-    /// @return true on successful initialization
+    /**
+     * @brief Checks the hardware ID and application status, starts the
+     *        application, and selects the driver's measurement mode.
+     * @return true if all initialization transactions succeed.
+     */
     bool begin();
 
-    /// @brief probe the STATUS register (0x00) for the DATA_READY bit
-    /// @return true if a new data sample is ready
+    /**
+     * @brief Checks the STATUS register's DATA_READY bit.
+     * @return true if a new sample is ready; false if not ready or the read fails.
+     */
     bool available();
 
-    /// @brief set compensation parameters with humidity and temp
-    /// @param humidity percentage describing humidity
-    /// @param temp measured in C
+    /**
+     * @brief Writes environmental compensation values to the sensor.
+     * @param humidity Relative humidity in percent (0-100).
+     * @param temp Temperature in degrees Celsius (-25 to 102.998).
+     * @return true if the values are in range and the write succeeds.
+     */
     bool compensate(float humidity, float temp);
 
-    /// @brief burst read and combine bytes from MSB/LSB for each data field in ALG_RESULT_DATA reg
+    /**
+     * @brief Reads the algorithm result and updates @ref eco2 and @ref tvoc.
+     *
+     * If the I2C read fails, the previously stored values are unchanged.
+     */
     void read();
 
-    uint16_t eco2 = 0; // ppm
-    uint16_t tvoc = 0; // ppb
+    /** Equivalent CO2 concentration in parts per million (ppm). */
+    uint16_t eco2 = 0;
+
+    /** Total volatile organic compounds in parts per billion (ppb). */
+    uint16_t tvoc = 0;
 
 private:
     uint8_t _addr;
